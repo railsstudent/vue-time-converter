@@ -1,6 +1,7 @@
 <template>
   <div>
-    <time-converter @submitPerformed="printSubmittedData"></time-converter>
+    <time-theme @themeChange="setTheme"></time-theme>
+    <time-converter @submitPerformed="printSubmittedData" :theme="theme"></time-converter>
     <div class="output-container" v-if="toTimeZone && fromTimeZone">
       <p class="list-item">Custom event fired.</p>
       <ul class="output-list">
@@ -20,10 +21,14 @@ export default {
     return {
       fromTimeZone: null,
       toTimeZone: null,
-      convertedTime: ""
+      convertedTime: "",
+      theme: "rebeccapurple"
     };
   },
   methods: {
+    setTheme(evt) {
+      this.theme = evt.detail;
+    },
     printSubmittedData(evt) {
       const { fromTimeZone, toTimeZone, convertedTime } = evt.detail;
       this.fromTimeZone = fromTimeZone;
