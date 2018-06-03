@@ -1,14 +1,14 @@
 <template>
   <div>
     <time-converter @submitPerformed="printSubmittedData"></time-converter>
-    <div class="output-container" v-if="submittedData.toTimeZone && submittedData.fromTimeZone">
+    <div class="output-container" v-if="toTimeZone && fromTimeZone">
       <p class="list-item">Custom event fired.</p>
       <ul class="output-list">
-      <li>From Time Zone: {{submittedData.fromTimeZone.utc}},
-        From Time Zone Offset: {{submittedData.fromTimeZone.offset}}</li>
-      <li>To Time Zone: {{submittedData.toTimeZone.utc}},
-        To Time Zone Offset: {{submittedData.toTimeZone.offset}}</li>
-      <li>Converted String: {{submittedData.convertedTime}}</li>
+      <li>From Time Zone: {{fromTimeZone.utc}},
+        From Time Zone Offset: {{fromTimeZone.offset}}</li>
+      <li>To Time Zone: {{toTimeZone.utc}},
+        To Time Zone Offset: {{toTimeZone.offset}}</li>
+      <li>Converted String: {{convertedTime}}</li>
       </ul>
     </div>
   </div>
@@ -18,21 +18,17 @@
 export default {
   data() {
     return {
-      submittedData: {
-        fromTimeZone: null,
-        toTimeZone: null,
-        convertedTime: ""
-      }
+      fromTimeZone: null,
+      toTimeZone: null,
+      convertedTime: ""
     };
   },
   methods: {
     printSubmittedData(evt) {
       const { fromTimeZone, toTimeZone, convertedTime } = evt.detail;
-      this.submittedData = {
-        fromTimeZone,
-        toTimeZone,
-        convertedTime
-      };
+      this.fromTimeZone = fromTimeZone;
+      this.toTimeZone = toTimeZone;
+      this.convertedTime = convertedTime;
     }
   }
 };
